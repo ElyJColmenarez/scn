@@ -738,6 +738,7 @@
 								est.apellido1,
 								curso.seccion,
 								coalesce (doce.nombre1 || ' '|| doce.apellido1,'') as nom_docente ,
+								doce.cor_personal as cor_docente ,
 								uni_curricular.nombre as uni_nombre,
 								coalesce(est.cor_personal,'') as cor_personal,
 								cur.nota, 
@@ -1089,18 +1090,25 @@
 							order by (cur_estudiante.nota) asc";
 					**/
 					$consulta ="
-							select curso.codigo ,persona.nombre1 as nombre ,persona.apellido1 as apellido,
-							uni_cur.nombre as uni_curr,cur_estudiante.cod_estado as estado,
-							trayecto.num_trayecto as trayecto,curso.seccion,cur_estudiante.nota,uni_cur.codigo
-							as cod_uni, periodo.cod_estado,cur_estudiante.cod_estudiante as cod_estudiante
+							select 	curso.codigo,
+									persona.nombre1 as nombre,
+									persona.apellido1 as apellido,
+									uni_cur.nombre as uni_curr,
+									cur_estudiante.cod_estado as estado,
+									trayecto.num_trayecto as trayecto,
+									curso.seccion,
+									cur_estudiante.nota,
+									uni_cur.codigo as cod_uni, 
+									periodo.cod_estado,
+									cur_estudiante.cod_estudiante as cod_estudiante
 								from sis.t_curso as curso 
 								left join (select cur_estud.* from sis.t_cur_estudiante as cur_estud 
 										where cur_estud.cod_estudiante=?)as cur_estudiante 
-								on curso.codigo= cur_estudiante.cod_curso
+									on curso.codigo= cur_estudiante.cod_curso
 								inner join sis.t_uni_curricular as uni_cur
-								on uni_cur.codigo=curso.cod_uni_curricular 
+									on uni_cur.codigo=curso.cod_uni_curricular 
 								left join sis.t_est_cur_estudiante as est_cur_est 
-								on est_cur_est.codigo=cur_estudiante.cod_estado
+									on est_cur_est.codigo=cur_estudiante.cod_estado
 								left join sis.t_persona  as persona on 
 								persona.codigo=curso.cod_docente inner join 
 								sis.t_trayecto as trayecto on 
@@ -1128,7 +1136,7 @@
 							and ((periodo.cod_estado='C' and cur_estudiante.cod_estudiante is not null) or 
 							(periodo.cod_estado='A' ))
 							
-							order by (cur_estudiante.nota) asc
+							order by trayecto.num_trayecto, uni_cur.nombre, curso.seccion,  (cur_estudiante.nota) asc
 				";
 					
 				$ejecutar= $conexion->prepare($consulta);
@@ -1418,7 +1426,8 @@
 										persona.cedula as ceduladoc,
 										trayecto.num_trayecto,
 										insti.nombre as insti,
-										cur.seccion
+										cur.seccion,
+										cur.codigo as codigo
 
 										from sis.t_curso as cur
 										left join sis.t_periodo as periodo

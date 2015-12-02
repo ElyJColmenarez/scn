@@ -419,11 +419,11 @@ class CursoControlador {
 					
 				}
 				else{
-					$mensaje = "No hay estudiantes en ese curso";
+					$mensaje = "No hay estudiantes inscritos en este curso.";
 					Vista::asignarDato('mensaje',$mensaje);
 				}
 				if (PostGet::obtenerPostGet('m_formato')=='txt')
-					Vista::asignarNombreArchivoDestino("curso_".$r[0]['cod_curso']);
+					Vista::asignarNombreArchivoDestino("curso_" . $codigoCurso . "_correos.txt");
 				Vista::mostrar();
 			}catch (Exception $e){
 				throw $e;	
@@ -712,10 +712,13 @@ class CursoControlador {
 				
 				$r = CursoServicio::obtenerEstConPensum($codCurso);
 				$l = CursoServicio::obtenerLeyendaEstatusCurso();
+
 				if($r){
 					Vista::asignarDato('estatus',1);
 					Vista::asignarDato('leyenda',$l);
 					Vista::asignarDato('estudiante',$r);
+					Vista::asignarDato('datocurso',CursoServicio::obtenerDatosCurso($codCurso));
+
 				}
 				else{
 					Vista::asignarDato("mensaje", "Hubo un error al generar el PDF. Revise los datos del curso.");

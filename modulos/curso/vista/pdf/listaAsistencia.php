@@ -2,6 +2,9 @@
 
 	$estudiantes = Vista::obtenerDato('estudiante');
 	$curso = Vista::obtenerDato("datocurso");
+
+	$nombreArchivoDestino = "curso_" . $curso[0]["codigo"] . "_asistencia.pdf";
+
 	
 	$pdf = new FPDF('l','mm','A4');
 
@@ -12,13 +15,26 @@
 	$pdf->SetLeftMargin(15);
 	$pdf->SetTopMargin(22);
 	
-	$pdf->Image('recursos/imgPropias/fotos/iut.png',20);
-	$pdf->Image('recursos/imgPropias/fotos/head.png',70,10,200);
+	//$pdf->Image('recursos/imgPropias/fotos/iut.png',20);
+	//$pdf->Image('recursos/imgPropias/fotos/head.png',70,10,200);
 	
 	$pdf->SetFont('Arial','B',14);
-	$pdf->Cell(0,10,"LISTADO DE ESTUDIANTES - PERIODO ".$curso[0]['periodo']." - TRAYECTO ".$curso[0]['num_trayecto'],0,0,'',true);
+	$pdf->Cell(0,5,"LISTADO DE ESTUDIANTES - PERIODO ".$curso[0]['periodo']." - TRAYECTO ".$curso[0]['num_trayecto'],0,0,'',true);
 	$pdf->Ln();
 	
+	//var_dump ($curso);
+/*
+	foreach($curso as $c => $v){
+		$pdf->Cell(0,5,"$c  :    $v",0,0,'',true);
+		$pdf->Ln();
+	}
+*/
+	
+
+
+
+
+
 	$pdf->SetFont('Arial','B',11);
 	$pdf->Cell(50,7,"UNIDAD CURRICULAR: ",0,0,'',true);
 	$pdf->SetTextColor(0);
@@ -70,5 +86,7 @@
 	$pdf->Cell(0,10,"OBSERVACIONES: ",0,0,'',true);
 	
 
-	$pdf->Output("LISTA DE ASISTENCIA_".$curso[0]['nombreuni']." Seccion ".$curso[0]['seccion'].".pdf", 'D');
+//	$pdf->Output("LISTA DE ASISTENCIA_".$curso[0]['nombreuni']." Seccion ".$curso[0]['seccion'].".pdf", 'D');
+	$pdf->Output($nombreArchivoDestino , 'D');
+
 ?>

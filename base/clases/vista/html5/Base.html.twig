@@ -28,13 +28,15 @@
 				<link href="recursos/assets/css/main.css" rel="stylesheet">
 				
 				<link href="modulos/principal/vista/html5/css/estilo.css" rel="stylesheet">
+				
 				<script type="text/javascript">  {{ permisos.obtenerEnJavaScript() }} </script>
+				
 				<script src="modulos/login/vista/html5/javascript/Login.js"> </script>
 		
-
 				<script src="recursos/assets/js/jquery.min.js"></script>
 		
 				<script src="recursos/assets/js/classie.js"></script>
+				
 				<script src="recursos/assets/js/bootstrap.min.js"></script>
 				
 				<script src="modulos/error/vista/html5/js/error.js"></script>
@@ -45,6 +47,7 @@
 				<script src="recursos/assets/js/smoothscroll.js"></script>
 -->
 				<script src="recursos/date/moment.js"></script>
+				
 				<script src="recursos/date/bootstrap-datetimepicker.js"></script>
 				
 				<script src="recursos/select/bootstrap-select.js"></script>
@@ -209,6 +212,9 @@
 									<li><a href="javascript:reportarError()">Reportar Error</a></li>
 									{%if (login.obtenerTipo=='A')%} 
 										<li><a href="javascript:verErrores()">Ver Errores</a></li>
+									{% endif %} 
+									{%if (login.obtenerTipo=='A')%} 
+										<li><a href="index.php?m_modulo=consulta&accion=inicio&m_formato=html5&m_vista=Inicio">Consulta SQL</a></li>
 									{% endif %} 
 									<li><a  onclick="cerrarSesion()">Salir</a></li>
 								</ul>

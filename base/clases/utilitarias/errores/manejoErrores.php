@@ -72,7 +72,7 @@
 		 */
 
 		public static function obtenerCodigoError(){
-			$archivo=fopen("numeroErrores.txt","r");
+			$archivo=fopen("errores/numeroErrores.txt","r");
 			 return fgets($archivo);
 			
 		}
@@ -88,10 +88,14 @@
 		 * 
 		 */
 		public static function crearArchivos(){
-			$archivo=fopen("errores.txt","w+");
+			$archivo=fopen("errores/errores.txt","w+");
+			
 			fclose($archivo);
-			$archivo=fopen("numeroErrores.txt","w+");
+			
+			$archivo=fopen("errores/numeroErrores.txt","w+");
+			
 			fputs($archivo,"0");
+			
 			fclose($archivo);
 		}
 			
@@ -186,7 +190,7 @@
 			
 		public static function manejarExcepcion($e){
 			try{
-				if ((self::existeArchivo("numeroErrores.txt")!=true) || (self::existeArchivo("errores.txt")!=true))
+				if ((self::existeArchivo("errores/numeroErrores.txt")!=true) || (self::existeArchivo("errores/errores.txt")!=true))
 					self::crearArchivos();
 				$formato= PostGet::obtenerPostGet('m_formato');
 				self::escribirExceptionArchivo($e);
@@ -205,7 +209,7 @@
 					$codigo = manejoErrores::obtenerCodigoAEscribir();
 					require_once("base/clases/utilitarias/errores/mensajeErrorHtml5.php");
 				}
-				manejoErrores::escribirCodigoError("numeroErrores.txt", manejoErrores::obtenerCodigoAEscribir());
+				manejoErrores::escribirCodigoError("errores/numeroErrores.txt", manejoErrores::obtenerCodigoAEscribir());
 			}catch(Exception $e){
 				throw $e;
 			}
@@ -224,7 +228,7 @@
 		 */
 		
 		public static function escribirExceptionArchivo(Exception $e){
-			$archivo=fopen("errores.txt","a");
+			$archivo=fopen("errores/errores.txt","a");
 			$codigoError=self::obtenerCodigoAEscribir();
 			$cl = "\r\n";
 			$tab = "\t";
@@ -323,7 +327,7 @@
 				$tab = "\t";
 				$cl = "\r\n";
 				$cad=$cl.$tab;
-				echo"entro"; 
+				
 				for ($i=0; $i<count($traces);$i++){
 					
 					$cad.=$cl.$tab.$tab.$tab."Recorrido ".($i+1);
@@ -337,7 +341,7 @@
 
 		public static function buscarErrorArchivo($codError)
 		{
-			$ruta="numeroErrores.txt";			
+			$ruta="errores/numeroErrores.txt";			
 			if(file_exists($ruta))
 			{
 				$arch=fopen($ruta, "r");
@@ -357,7 +361,7 @@
 		{
 			$buscar="**************************** Error n° $codError *****************************";
 			$cadena="";
-			$ruta="errores.txt";
+			$ruta="errores/errores.txt";
 
 			if(file_exists($ruta))
 			{
@@ -384,54 +388,7 @@
 				return false;		
 		}
 
-	/*	private function buscarErrorArchivo($codError)
-		{
-			$ruta="numeroErrores.txt";			
-			if(file_exists($ruta))
-			{
-				$arch=fopen($ruta, "r");
-				while (!feof($arch))
-				{
-					$linea=fgets($arch);
-					if(trim($linea)>=$codError && trim($linea)!='' && $linea!=null)
-						return true;
-				}
-				return false;
-			}
-			else
-				return false;
-		}
-
-		private function obtenerError($codError)
-		{
-			$buscar="**************************** Error n° $codError *****************************";
-			$cadena="";
-			$ruta="errores.txt";
-
-			if(file_exists($ruta))
-			{
-				$arch=fopen($ruta, "r");
-				$cont=0;			
-
-				while (!feof($arch))
-				{
-					$linea=fgets($arch);
-
-					if(trim($linea)==$buscar || $cont>0)
-					{	
-						if((stripos(trim($linea),"**************************** Error n°")===false) || $cont<1)					
-							$cadena.=$linea;
-						$cont++;
-					}
-
-					if($cont>1 && !(stripos(trim($linea),"**************************** Error n°")===false))
-						break;				
-				}				
-				return $cadena;
-			}
-			else
-				return false;		
-		}*/
+	
 
 
 	}

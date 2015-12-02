@@ -79,7 +79,7 @@ class LoginControlador {
 			$permisos=new Permisos();
 			$permisos::iniciar();
 			$permisos::asignarPermisos();
-			$login= new Login('usuarioSCN','Administrador',"A",1,'usuarioscn',$password,null,null,null,null,null);
+			$login= new Login('usuarioSCN','Administrador',"A",-1,'usuarioscn',$password,null,null,null,null,null);
 			Sesion::iniciar($login,$permisos);
 			Vista::asignarDato("login",$login);
 			Vista::asignarDato("permisos",$permisos);

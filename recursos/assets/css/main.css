@@ -8,7 +8,7 @@
  */
 
 body {
-    font-family: 'Aller';
+    font-family: 'Roboto';
     font-weight: 300;
     font-size: 16px;
     color: black;
@@ -19,13 +19,13 @@ body {
 }
 
 @font-face {
-	font-family: 'Aller';
-	src: url('../../../otros/Aller/Aller_Rg.ttf'); 
+	font-family: 'Roboto';
+	src: url('../../../otros/roboto/Roboto-Regular.ttf'); 
 }
 
 /* Titles */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto';
     font-weight: 300;
     color: #333;
 }
@@ -547,7 +547,7 @@ a:after {
   position: relative;
   padding: 20px;
   overflow: auto;
-  min-height: 250px;
+  min-height: fixed;
   max-height: 500px;
   height:fixed;
 }
@@ -653,6 +653,10 @@ a:after {
 }
 
 .navbar {
-
-  z-index:1049;
+	-webkit-transition: display 5s linear;
+	   -moz-transition: display 5s linear;
+		-ms-transition: display 5s linear;
+		 -o-transition: display 5s linear;
+			transition: display 5s linear;
+	z-index:1049;
 }

@@ -65,7 +65,6 @@ class PrincipalControlador {
 	*/
 	
 	public static function iniciar(){
-			
 		self::configurar();
 		self::manejarRequerimiento();
 	}    
@@ -137,9 +136,7 @@ class PrincipalControlador {
 		// y convertirlo a minuscula
 		try {
 		$modulo = strtolower(PostGet::obtenerPostGet('m_modulo'));
-		
-		
-		
+
 		require_once("Bloque.php");
 		
 		}catch (Exception $e){
@@ -155,9 +152,14 @@ class PrincipalControlador {
 		url: index.php?modulo=principal&accion=phpinfo 
 		url:index.phpmodulo=principal&accion=crearclase&nombreclase= 						      	Fraccion&atributos=numerador,denominador  	 
 	*/
+	
+	
+	public static function error(){
+		header:"base/clases/utilitaria/errores/manejarErrorHtml5.php";
+	}
+	
 	private static function manejarAccion(){
 		$accion = PostGet::obtenerPostGet('m_accion');
-			
 		if ($accion=='phpinfo')
 			phpinfo();
 		elseif ($accion=='crearclase')

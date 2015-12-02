@@ -20,9 +20,8 @@ function construirInstituto(){
 }
 
 function succInst(data){
-	if(data.estatus > 0){
+	if(data.estatus > 0)
 		montarInstitutos(data.institutos);
-	}
 	else{
 		$('#instituto').selectpicker('destroy');
 		mostrarMensaje(data.mensaje,4);

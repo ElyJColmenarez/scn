@@ -1,16 +1,16 @@
 
-function validarSoloTexto(id, min, max, req = false){
+function validarSoloTexto(id, min, max, req = false, pos = "top"){
 	$(".popover").hide();
 	var cad = $(id).val();
 	var val=/^[A-Za-z ÁÉÍÓÚáéíóúñÑ]{0,5000}$/;
 	if(req){
 		if(cad.length == 0){
-			detonarAdvertencia(id,"Este campo es requerido.");
+			detonarAdvertencia(id,"Este campo es requerido.",pos);
 			return false;
 		}
 		else{
 			if(!(validarMatch(cad,val))){				
-				detonarAdvertencia(id, "El campo no es correcto. Sólo letras.");
+				detonarAdvertencia(id, "El campo no es correcto. Sólo letras.",pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
@@ -22,11 +22,11 @@ function validarSoloTexto(id, min, max, req = false){
 	else{
 		if(cad.length > 0){
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Sólo letras.");
+				detonarAdvertencia(id, "El campo no es correcto. Sólo letras.",pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.2");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.",pos);
 				return false;
 			}
 		}
@@ -35,23 +35,23 @@ function validarSoloTexto(id, min, max, req = false){
 }
 
 
-function validarSoloTextoYCaracteres(id, min, max, req = false){
+function validarSoloTextoYCaracteres(id, min, max, req = false, pos = "top"){
 	$(".popover").hide();
 	var cad = $(id).val();
-	var val=/^[A-Za-z ÁÉÍÓÚáéí".óúñÑ]{0,5000}$/;
+	var val=/^[A-Za-z ÁÉÍÓÚáéí".óúñÑ]{0,500}$/;
 	if(req){
 		if(cad.length == 0){
-			detonarAdvertencia(id,"Este campo es requerido.");
+			detonarAdvertencia(id,"Este campo es requerido.",pos);
 			return false;
 		}
 		else{
 			if(!(validarMatch(cad,val))){
 				alert("entro");
-				detonarAdvertencia(id, "El campo no es correcto. Sólo letras.");
+				detonarAdvertencia(id, "El campo no es correcto. Sólo letras.",pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.1");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.",pos);
 				return false;
 			}
 		}
@@ -59,11 +59,11 @@ function validarSoloTextoYCaracteres(id, min, max, req = false){
 	else{
 		if(cad.length > 0){
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Sólo letras.");
+				detonarAdvertencia(id, "El campo no es correcto. Sólo letras.",pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.2");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.",pos);
 				return false;
 			}
 		}
@@ -72,23 +72,23 @@ function validarSoloTextoYCaracteres(id, min, max, req = false){
 }
 
 
-function validarSoloNumeros(id,min,max,req){
+function validarSoloNumeros(id,min,max,req, pos = "top"){
 	$(".popover").hide();
 	var cad = $(id).val();
 	var val = /^([0-9])*$/;
 
 	if(req){
 		if(cad.length == 0){
-			detonarAdvertencia(id,"Este campo es requerido.");
+			detonarAdvertencia(id,"Este campo es requerido.",pos);
 			return false;
 		}
 		else{
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Sólo caracteres numéricos.");
+				detonarAdvertencia(id, "El campo no es correcto. Sólo caracteres numéricos.",pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.",pos);
 				return false;
 			}
 		}
@@ -96,11 +96,11 @@ function validarSoloNumeros(id,min,max,req){
 	else{
 		if(cad.length > 0){
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Sólo caracteres numéricos.");
+				detonarAdvertencia(id, "El campo no es correcto. Sólo caracteres numéricos.",pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.",pos);
 				return false;
 			}
 		}
@@ -108,7 +108,7 @@ function validarSoloNumeros(id,min,max,req){
 	return true;
 }
 
-function validarFecha(id,req){
+function validarFecha(id,req,pos = "top"){
 	$(".popover").hide();
 	var cad = $(id).val();
 	
@@ -121,12 +121,12 @@ function validarFecha(id,req){
 	
 	if(req){
 		if(cad.length == 0){
-			detonarAdvertencia(id,"Este campo es requerido.");
+			detonarAdvertencia(id,"Este campo es requerido.",pos);
 			return false;	
 		}
 		else{
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Introduzca una fecha válida (XX/XX/XXXX).");
+				detonarAdvertencia(id, "El campo no es correcto. Introduzca una fecha válida (XX/XX/XXXX).",pos);
 				return false;
 			}
 		}
@@ -134,7 +134,7 @@ function validarFecha(id,req){
 	else{
 		if(cad.length > 0){
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Introduzca una fecha válida (XX/XX/XXXX).");
+				detonarAdvertencia(id, "El campo no es correcto. Introduzca una fecha válida (XX/XX/XXXX).",pos);
 				return false;
 			}
 		}
@@ -143,23 +143,23 @@ function validarFecha(id,req){
 	return true;
 }
 
-function validarEmail(id,min = 5 ,max = 30, req = false){
+function validarEmail(id,min = 5 ,max = 30, req = false, pos = "top"){
 	$(".popover").hide();
 	var cad = $(id).val();
 	var val = /[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 
 	if(req){
 		if(cad.length == 0){
-			detonarAdvertencia(id,"Este campo es requerido.");
+			detonarAdvertencia(id,"Este campo es requerido.",pos);
 			return false;
 		}
 		else{
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Introduzca un correo válido (ejemplo@ejemplo.ej).");
+				detonarAdvertencia(id, "El campo no es correcto. Introduzca un correo válido (ejemplo@ejemplo.ej).",pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.",pos);
 				return false;
 			}
 		}
@@ -167,11 +167,11 @@ function validarEmail(id,min = 5 ,max = 30, req = false){
 	else{
 		if(cad.length > 0){
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Introduzca un correo válido (ejemplo@ejemplo.ej)");
+				detonarAdvertencia(id, "El campo no es correcto. Introduzca un correo válido (ejemplo@ejemplo.ej)",pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.",pos);
 				return false;
 			}
 		}
@@ -179,23 +179,23 @@ function validarEmail(id,min = 5 ,max = 30, req = false){
 	return true;
 }
 
-function validarTelefono(id, min, max, req){
+function validarTelefono(id, min, max, req, pos = "top"){
 	$(".popover").hide();
 	var cad = $(id).val();
 	var val =  	/^[0-9]{3,4}-? ?[0-9]{7}$/;
 
 	if(req){
 		if(cad.length == 0){
-			detonarAdvertencia(id,"Este campo es requerido.");
+			detonarAdvertencia(id,"Este campo es requerido.", pos);
 			return false;
 		}
 		else{
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Introduzca un teléfono válido (XXXX-XXXXXXX)).");
+				detonarAdvertencia(id, "El campo no es correcto. Introduzca un teléfono válido (XXXX-XXXXXXX)).", pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.", pos);
 				return false;
 			}
 		}
@@ -203,11 +203,11 @@ function validarTelefono(id, min, max, req){
 	else{
 		if(cad.length > 0){
 			if(!(validarMatch(cad,val))){
-				detonarAdvertencia(id, "El campo no es correcto. Introduzca un teléfono válido (XXXX-XXXXXXX)).");
+				detonarAdvertencia(id, "El campo no es correcto. Introduzca un teléfono válido (XXXX-XXXXXXX)).", pos);
 				return false;
 			}
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.", pos);
 				return false;
 			}
 		}
@@ -215,17 +215,17 @@ function validarTelefono(id, min, max, req){
 	return true;
 }
 
-function validarRangos(id, min, max, req){
+function validarRangos(id, min, max, req, pos = "top"){
 	$(".popover").hide();
 	var cad = $(id).val();
 	if(req){
 		if(cad.length == 0){
-			detonarAdvertencia(id,"Este campo es requerido.");
+			detonarAdvertencia(id,"Este campo es requerido.", pos);
 			return false;
 		}
 		else{
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.", pos);
 				return false;
 			}
 		}
@@ -233,7 +233,7 @@ function validarRangos(id, min, max, req){
 	else{
 		if(cad.length > 0){
 			if(validarRango(cad,min,max)){
-				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.");
+				detonarAdvertencia(id,"El campo debe tener entre "+min+"-"+max+" caracteres.", pos);
 				return false;
 			}
 		}
@@ -250,8 +250,8 @@ function validarMatch(cad, patron){
 	return (cad.match(p));
 }
 
-function detonarAdvertencia(id,mensaje){
+function detonarAdvertencia(id,mensaje, pos){
 	$(id).popover('destroy');
-	$(id).popover({title: 'Validación:', content: mensaje , placement : "top", template : '<div id="pop'+id+'" class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
+	$(id).popover({title: 'Validación:', content: mensaje , placement : pos, template : '<div id="pop'+id+'" class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
 	$(id).trigger("click");
 }

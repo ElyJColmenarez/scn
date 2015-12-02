@@ -53,7 +53,11 @@ else if($modulo == 'persona'){
 	PersonaControlador::manejarRequerimiento();
 }
 else if($modulo == 'principal'){
-	self::inicio();
+	if(PostGet::obtenerPostGet("m_accion") == "error"){
+		throw new Exception("404");
+	}
+	else
+		self::inicio();
 }
 else if($modulo == 'trayecto'){
 	require_once 'modulos/trayecto/TrayectoControlador.php';
@@ -67,6 +71,8 @@ else if($modulo == 'usuario_NO_FUNCIONAL_AUN_JOHAN_ALAMO'){
 	require_once 'modulos/usuario_NO_FUNCIONAL_AUN_JOHAN_ALAMO/Usuario_NO_FUNCIONAL_AUN_JOHAN_ALAMOControlador.php';
 	Usuario_NO_FUNCIONAL_AUN_JOHAN_ALAMOControlador::manejarRequerimiento();
 }
+else if($modulo == 'errorP')
+	self::error();
 else 
 	throw new Exception ('(PrincipalControlador) Módulo inválido:'.$modulo);
 ?>

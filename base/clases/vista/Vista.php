@@ -328,7 +328,7 @@
 		}
 		
 		private static function mostrarTxt(){
-			if(self::obtenerDatos() != null){				
+			if(self::obtenerDatos() != null){
 				header("Content-type: text/plain");
 				header("Content-Disposition: attachment; filename=".self::$nombreArchivoDestino);
 				require_once(self::obtenerRuta());

@@ -2,7 +2,7 @@
 	$sql = Vista::obtenerDato("sql");
 	$resultado = Vista::obtenerDato("resultado");
 	
-	$arch = fopen(Vista::$nombreArchivoDestino,"w");
+	$arch = fopen("temp/".Vista::$nombreArchivoDestino,"w");
 	
 	if($sql == NULL){
 		fwrite($arch, "Resultado:\n");
@@ -35,5 +35,4 @@
 	
 	fclose($arch);
 	
-	unlink(Vista::$nombreArchivoDestino);
 ?>

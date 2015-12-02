@@ -19,18 +19,6 @@
 	
 	$infUnidades = Vista::obtenerDato('infUnidades');
 	
-
-/*
-	echo "<pre>";
-	var_dump($infDocentes);
-	echo "--------------------------------------------------------------";
-	echo "--------------------------------------------------------------";
-	echo "--------------------------------------------------------------\n";
-	var_dump(CursoServicio::agruparPor($infUniPeriodos,'cod_uni_ministerio'));
-*/
-
-
-	
 	$pdf = new FPDF('p','mm','A4');
 
 	$pdf->AddPage();
@@ -40,8 +28,8 @@
 	$pdf->SetLeftMargin(10);
 	$pdf->SetTopMargin(10);
 	
-	$pdf->Image('recursos/imgPropias/fotos/iut.png',20);
-	$pdf->Image('recursos/imgPropias/fotos/head.png',70,10,200);
+	$pdf->Image('recursos/imgPropias/fotos/iut.png');
+	//$pdf->Image('recursos/imgPropias/fotos/head.png',70,10,200);
 	
 	$pdf->SetFont('Arial','B',14);
 	$pdf->Cell(0,10,"REPORTE ACADÉMICO",0,0,'C',true);

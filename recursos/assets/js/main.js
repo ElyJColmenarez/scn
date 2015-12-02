@@ -1,3 +1,10 @@
+/*
+ * Variable encargada de llevar el scroll de la página.
+ * 
+ * Se se
+ */
+
+var scrollA = 0;
 
 ;(function(){
 	$('#menuToggle, .menu-close').on('click', function(){
@@ -191,7 +198,7 @@ function crearDialogo(id, titulo, segundoTitulo, size, accion, boton = 'Aceptar'
 		else
 			cad3 = '';
 
-		$('<div class="modal fade" id="'+id+'" data-backdrop="static">'+
+		$('<div class="modal" id="'+id+'" data-backdrop="static">'+
 			cad +
 				'<div class="modal-content">'+
 					'<div class="modal-header">'+
@@ -265,6 +272,7 @@ function activarCal(){
           
 }
 
+
 function obtenerMenu(opcion){
 	if(opcion == "A"){
 		if($("#menuIA").length == 0){
@@ -296,3 +304,13 @@ function obtenerMenu(opcion){
 		
 	}
 }
+
+$(window).scroll(function(event){
+									if($(window).scrollTop() > scrollA){
+										$(".navbar").css("display","none");
+									}
+									else{
+										$(".navbar").css("display","block");
+									}
+									scrollA = $(window).scrollTop();
+								});

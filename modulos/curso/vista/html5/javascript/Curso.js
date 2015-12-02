@@ -476,7 +476,6 @@ function succCursosPasadosDisponibles(datos){
 
 			
 			for (var i=0;i<cursos.length;i++){
-				console.log(cursos[i]['estado']);
 
 				if (cursos[i]['estado']=="A"){
 					cursosAprobados+=armarCurso(cursos[i],"retornar");
@@ -665,7 +664,7 @@ function armarCurso(curso,tipo){
 	/*
 	 * Se construye la cadena en cuestión.
 	 */
-	console.log(curso);
+	 
 	cadena+="<div class='row cur' id='"+curso['codigo']+"' style='text-align:center;'>";
 	cadena+="<div class='col-lg-3 uniCur stiloCruso'><h5>"+curso['uni_curr']+"</h5></div>";
 	
@@ -1015,7 +1014,7 @@ function asignarFecha(){
  */
 
 function error(data){
-	console.log(data);
+	
 	mostrarMensaje("Error de comunicación con el servidor",2);	
 }
 
@@ -1861,7 +1860,7 @@ function montarEstudiantes(estudiantes){
 		$("<div class='row'><div class='col-md-6'></div><div class='col-md-6'><select class='selectpicker' id='selectPDF' data-style='btn-danger' data-live-search='true' data-size='auto' multiple data-max-options='1' title='Exportar...' onchange='funcionPDF()'>" +
 		  "<option value=\"index.php?m_modulo=curso&m_accion=verEstudiantesPDF&m_vista=verEstudiantes&m_formato=pdf&codigoCurso="+$('#codigoCurso').val()+"\">Acta de Notas (PDF)</option>" +
 		  "<option value=\"index.php?m_modulo=curso&m_accion=listarE&m_vista=listaAsistencia&m_formato=pdf&codigoCurso="+$('#codigoCurso').val()+"\">Lista de Asistencia (PDF)</option>"+
-		  "<option value=\"index.php?m_modulo=curso&m_accion=listarE&m_vista=listaAsistencia&m_formato=odt&codigoCurso="+$('#codigoCurso').val()+"\">Lista de Asistencia (ODT)</option>"+
+//		  "<option value=\"index.php?m_modulo=curso&m_accion=listarE&m_vista=listaAsistencia&m_formato=odt&codigoCurso="+$('#codigoCurso').val()+"\">Lista de Asistencia (ODT)</option>"+
 		  "<option value=\"index.php?m_modulo=curso&m_accion=listarE&m_vista=listaCorreos&m_formato=txt&codigoCurso="+$('#codigoCurso').val()+"\">Lista de Correos (TXT)</option>"+
 		  "</select></div></div>").appendTo(".modal-header");
 
@@ -1876,7 +1875,10 @@ function montarEstudiantes(estudiantes){
 		cadena+="<td>Nota/% Asistencia</td> " ;
 		cadena+="<td>Estado</td> " ;
 		cadena+="</tr>";
-
+		cadena+="</table>";
+		
+		cadena+="<table class='table table-hover' id='tablaEstudiantes'>";
+		
 		for (i=0;i<estudiantes.length;i++){
 			
 			cadena+="<tr>";
@@ -1898,13 +1900,16 @@ function montarEstudiantes(estudiantes){
 
 			cadena+="<td>"+estudiantes[i]['nombre']+"</td>";
 			cadena+="</tr>";
+			
+			
+			
+			
 		}
-	cadena+="</table>";
+		cadena+="</table>";
 
-	$(cadena).appendTo('#estudiantesT');
-	
-	$("#verEstudiantes").modal("show");
-	
+		$(cadena).appendTo('#estudiantesT');
+		
+		$("#verEstudiantes").modal("show");
 	}
 }
 /*
@@ -1975,7 +1980,6 @@ function succCargarNotas(data){
 		estudiantes = data.estudiante;
 		montarEstudiantesNotas(estudiantes);
 		selectEstudiantes(estudiantes);
-		
 	}
 	else
 		mostrarMensaje(data.mensaje,4);
@@ -2035,7 +2039,7 @@ function montarEstudiantesNotas(estudiantes){
 			cadena+="</table>";
 			mostrarMensaje('El curso elegido no posee estudiantes',4);
 		}else{
-			cadena+="<table class='table ' id='tablaEstudiantes'>";
+			cadena+="<table class='table table-hover' id='tablaEstudiantes'>";
 			cadena+="<thead>";
 			cadena+="<tr class='titulo'>";
 			cadena+="<td>#</td> " ;
@@ -2069,8 +2073,8 @@ function montarEstudiantesNotas(estudiantes){
 				cadena+="<td>"+estudiantes[i]['nombre1']+"<input type='hidden' id='nombre"+i+"' value='"+estudiantes[i]['nombre1']+"'></td>";
 				
 				
-				cadena+="<td class='col-md-1'><input type='text' class='form-control' onkeyup=\"validarSoloNumeros('#nota"+i+"',0,3,false)\" onchange='cambiarEstatusNotas("+i+")' id='nota"+i+"' value='"+estudiantes[i]['nota']+"'>";	
-				cadena+="<td class='col-md-1'><input type='text' id='por_asistencia"+i+"' onkeyup=\"validarSoloNumeros('#por_asistencia"+i+"',0,3,false)\" onchange='cambiarEstatusNotas("+i+")' class='form-control' value='"+estudiantes[i]['por_asistencia']+"'></td>";
+				cadena+="<td class='col-md-1'><input type='text' class='form-control' onkeyup=\"validarSoloNumeros('#nota"+i+"',0,3,false,'bottom')\" onchange='cambiarEstatusNotas("+i+")' id='nota"+i+"' value='"+estudiantes[i]['nota']+"'>";	
+				cadena+="<td class='col-md-1'><input type='text' id='por_asistencia"+i+"' onkeyup=\"validarSoloNumeros('#por_asistencia"+i+"',0,3,false,'bottom')\" onchange='cambiarEstatusNotas("+i+")' class='form-control' value='"+estudiantes[i]['por_asistencia']+"'></td>";
 				cadena+="<td class='col-md-1'><select id='estado"+i+"' onchange='cambiarEstatusNotas("+i+")' class='selectpicker' data-live-search='true' data-size='auto' multiple data-max-options='1' title='Seleccione Estudiante'>";
 				cadena += "<option value='A'>Aprobado</option>";
 				cadena += "<option value='C'>Cursando</option>";
@@ -2172,6 +2176,7 @@ function succListarE(data){
 		estudiantes = data.estudiante;
 		montarEstSelect(estudiantes);
 		activarSelect();
+		
 	}else{
 		mostrarMensaje("No hay estudiantes disponibles para este curso.",4);
 	}
@@ -2421,7 +2426,7 @@ function actualizarListarCursos(data){
 		var subcadena = "";
 		
 		subcadena += '<div id="botonFil"><select id="btnFiltrar" class="selectpicker" title="Sin filtrar" onchange="filtrar()"></select></div>';
-		cadena += '<table class="table" id="tTabla">';
+		cadena += '<div class="table-responsive"><table class="table" id="tTabla">';
 		
 		var trayecto = '';
 		var fondo = 'blue';
@@ -2549,13 +2554,13 @@ function actualizarListarCursos(data){
 				cadena += 'S/F';			
 			cadena +="</td>"
 			cadena +="<td>"
-			cadena +="	<button type='button' class='btn btn-primary btn-sm' onClick=\"verEstudiantes("+cursos[i].codigo+",'"+cursos[i].nombre+"','Profesor: "+cursos[i].nombrecompleto+"','Aceptar')\" data-toggle='modal' data-target='#verEstudiantes' title='Ver Estudiantes'>";
+			cadena +="	<button type='button' class='btn btn-primary btn-sm' onClick=\"verEstudiantes("+cursos[i].codigo+",'"+cursos[i].nombre+"','Profesor: "+cursos[i].nombrecompleto+"','Aceptar')\"  title='Ver Estudiantes'>";
 			cadena +='		<i class="icon-group"></i>';
 			cadena +="	</button>";
 			cadena +="</td>";
 			cadena +="<td>";
 			if (($("#estPeriodo").val()=="Abierto") && ((cursos[i].cod_docente==data.login.codigo) ||  ((permiso.curso.insert)&&(permiso.curso.delete)&&(permiso.curso.update)) )) {
-				cadena +="	<button type='button' class='btn btn-info btn-sm' onClick=\"cargarNotas("+cursos[i].codigo+",'"+cursos[i].nombre+"','Profesor: "+cursos[i].nombrecompleto+"')\" class='btn btn-info' data-toggle='modal' data-target='#cargarNotas' title='Cargar Notas'>";
+				cadena +="	<button type='button' class='btn btn-info btn-sm' onClick=\"cargarNotas("+cursos[i].codigo+",'"+cursos[i].nombre+"','Profesor: "+cursos[i].nombrecompleto+"')\" class='btn btn-info' title='Cargar Notas'>";
 				cadena +='<i class="icon-book"></i><i class="icon-pencil"></i>';
 				cadena +="	</button>"
 			}
@@ -2564,7 +2569,7 @@ function actualizarListarCursos(data){
 			
 			contador = 0;
 		}
-		cadena +="</table>";
+		cadena +="</table></div>";
 		
 		$(cadena).appendTo('#listarC');
 		
@@ -2599,7 +2604,7 @@ function actualizarListarCursosP(data){
 		$('#menCurso').remove();
 		$('#tTabla').remove();
 	
-		cadena += '<table class="table" id="tTabla">';
+		cadena += '<table class="table " id="tTabla">';
 
 		var trayecto = '';
 
@@ -2775,24 +2780,33 @@ function validarTodoCurso(i){
 	return((validarSoloNumeros('#capacidad'+i,1,3,false))&&(validarFecha('#fecInicio'+i,false))&&(validarFecha('#fecFinal'+i,false))&&(validarRangos('#observaciones'+i,0,30,false))&&(validarSoloTexto("#"+i,0,40,false)));
 }
 
+function abrirFil(){
+	if($("#movible").css("left") == "0px"){
+		$("#movible").css("left","-67%");
+	}
+	else{
+		$("#movible").css("left","0%");
+	}
+}
 
-$(window).scroll(function(event){
+$(window).scroll(function(event){	
 									var scroll = $(window).scrollTop();
 									if(scroll >= 171){
-										//$("#movible").css("display","none");
 										$("#movible").css("position","fixed");
-										$("#movible").css("width","60%");
-										//$("#movible").css("left","50px");
+										$("#movible").css("width","70%");
 										$("#movible").css("top","750px");
+										$("#movible").css("left","-67%");
 										$("#movible").css("z-index","1000");
 										$("#movible").css("padding","2px");
-										//$("#movible").css("border","1px solid #6BD0DE");
 										$("#movible").css("background","white");
 										$("#movible").css("opacity","1");
 										$("#movible").css("border-radius","7px");
 										$("#movible").css("box-shadow","2px 1px 2px 1px #000009");
+										$("#contFil").remove();
+										$("#movible").append("<div class='row' id='contFil'><div class='col-md-11'></div><div class='col-md-1'><a href='javascript:abrirFil()'><i class='icon-search'></i></a></div></div>")
 									}
 									else{
+										$("#contFil").remove();
 										$("#movible").css("width","100%");
 										$("#movible").css("position","relative");
 										$("#movible").css("top","10px");
@@ -2804,4 +2818,3 @@ $(window).scroll(function(event){
 										$("#movible").css("box-shadow","0px 0px 0px 0px black");
 									}
 								});
-

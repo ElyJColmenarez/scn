@@ -1,8 +1,11 @@
 <?php
 	
 	$estudiantes = Vista::obtenerDatos();
-	
 	$leyenda = Vista::obtenerDato("leyenda");
+	$curso = Vista::obtenerDato("datocurso");
+
+	$nombreArchivoDestino = "curso_" . $curso[0]["codigo"] . "_acta_notas.pdf";
+
 
 	if(isset($estudiantes['estudiante'])){
 		$conta = 0;
@@ -183,7 +186,8 @@
 		$pdf->Ln();
 		$pdf->Cell(0,8,"C.I. ".$estudiantes['estudiante'][0]['ceduladoc'],0,0,'C',true);
 
-		$pdf->Output("ACTA DE NOTAS_".$estudiantes['estudiante'][0]['nombreuni'].".pdf", 'D');
+//		$pdf->Output("ACTA DE NOTAS_".$estudiantes['estudiante'][0]['nombreuni'].".pdf", 'D');
+		$pdf->Output($nombreArchivoDestino, 'D');
 	}
 	else{
 		$pdf = new FPDF('p','mm','A4');

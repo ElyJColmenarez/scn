@@ -34,13 +34,24 @@ function armarDato(m){
  *	funcErr: parámetro que representa la función que se ejecutará cuando 
  * 			la llamada ajax presente un error.
  */ 
+
 var ajaxMVC=function (a, funcSucc, funcErr){
 	$.ajax({
 			type:"post",
 			dataType:"json",
 			url: "index.php",
 			data: armarDato(a),
+			beforeSend: funcMouseW,
+			complete: funcMouseN,
 			success: funcSucc,
 			error: funcErr
 		});	
+}
+
+function funcMouseW(){
+	$("body").css("cursor","wait");
+}
+
+function funcMouseN(){
+	$("body").css("cursor","default");
 }

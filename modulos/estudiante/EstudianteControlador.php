@@ -121,7 +121,7 @@ Diseñador - Programador /   Fecha   / Descripción del cambio
 						if ($c > 0) 
 							$cad .= ",";
 						$cad .= "{";
-						$cad .= '"label": "' . $estudiante['nombre1']. ' ' . $estudiante['apellido1'] . '", ';
+						$cad .= '"label": "' . $estudiante['apellido1']. ', ' . $estudiante['nombre1'] . ' (CI: ' . $estudiante['cedula'] . ')", ';
 						$cad .= '"value": '.$estudiante['codigo'];
 						$cad .= "}";
 						$c++;
