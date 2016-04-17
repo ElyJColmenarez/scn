@@ -1,0 +1,13 @@
+en el archivo SisCoNot/modulos/curso/vista/txt/listaCorreos se determinó lo siguiente:
+//aquí se determinó que hay una caimanada, porque en la primera posición
+//guarda los datos del docente y del primer estudiante,
+//y en las siguientes sólo guarda la información del estudiante:
+//Revisado Por Johan Alamo el martes 10 de noviembre de 2015
+
+
+10 de noviembre de 2015
+en el archivo SisCoNot/base/clases/vista/Vista.php se determinó  lo siguiente:
+en la linea 331 del método mostrarTxt() aparecía la línea
+	readfile("temp /" . self::$nombreArchivoDestino);
+y se cambió por 
+	readfile(self::$nombreArchivoDestino);

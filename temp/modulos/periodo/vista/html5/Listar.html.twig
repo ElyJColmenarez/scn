@@ -1,0 +1,51 @@
+{% extends 'Periodo.html.twig' %}
+{% block contenido %}
+	<div id="headerwrap">
+		<div class="container">
+			<br>
+			<br>
+			<h2>Periodos</h2>
+			<h2>Seleccione los criterios para filtrar.</h2>
+			<br>
+			<div class="row">
+				<div class='col-md-2'>
+				</div>
+				
+				<div class='col-md-8' id='inst'>
+				
+				</div>
+				<br>
+				<br>
+			</div>
+			<div class="row">
+				<div class='col-md-2'>
+				</div>
+				
+				<div class='col-md-8' id='pen'>
+					
+				</div>
+				<br>
+				<br>
+			</div>
+			<div class="row">
+				<div class='col-md-2'>
+				</div>
+			
+				<div class='col-md-4' id='est'>
+				
+				</div>
+				<div class='col-md-4' id='pdf'>
+					<button class='btn btn-danger' onclick='reportePDF()'>Reporte PDF</button>
+				</div>
+			</div>
+				<br>
+				<button class='btn btn-primary' onclick='listar()' >Listar</button>
+				<br>
+				<br>
+				<div id='listaPeriodos'>
+				
+				</div>
+
+		</div>
+	</div>		
+{% endblock %}

@@ -1,0 +1,6 @@
+RewriteEngine on
+
+ErrorDocument 404 http://localhost/SisCoNot/.notfound.php
+#RewriteRule ^$ index.php
+#Rewriterule ^(.+)/(.+)/(.+)/(.+)$ index.php?m_modulo=$1&m_accion=$2&m_formato=$3&m_vista=$4 [L]
+#Rewriterule ^(.+)/(.+)/(.+)/(.+)$ index.php?m_modulo=$1&m_accion=$2&m_formato=$3&m_vista=$4 [L]
