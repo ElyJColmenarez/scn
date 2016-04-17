@@ -1,1 +1,0 @@
-pensum_accion = 'administrar';

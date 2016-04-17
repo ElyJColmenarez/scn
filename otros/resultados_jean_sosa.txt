@@ -1,4 +1,0 @@
-
-es extranjero, no extrangero
-faltan comentarios de la tabla t_est_docente..
-debes redactar los comentarios de manera más técnica.
